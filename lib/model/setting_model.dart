@@ -5,10 +5,10 @@ part 'setting_model.g.dart';
 
 @HiveType(typeId: 1)
 class SettingModel extends ChangeNotifier with HiveObjectMixin {
-  @HiveField(0)
+  // @HiveField(0)
   bool _bgm = false;
 
-  @HiveField(1)
+  // @HiveField(1)
   bool _sfx = false;
 
   SettingModel({bool bgm = true, bool sfx = true}) {
@@ -21,7 +21,7 @@ class SettingModel extends ChangeNotifier with HiveObjectMixin {
   set bgm(bool value) {
     _bgm = value;
     notifyListeners();
-    save();
+    // save();
   }
 
   bool get sfx => _sfx;
@@ -29,6 +29,6 @@ class SettingModel extends ChangeNotifier with HiveObjectMixin {
   set sfx(bool value) {
     _sfx = value;
     notifyListeners();
-    save();
+    // save();
   }
 }

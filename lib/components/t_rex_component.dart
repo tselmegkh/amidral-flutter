@@ -156,15 +156,14 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
     }
 
     await checkMentalHealth();
-    int val = 0;
     playerData.allDebts.forEach((key, value) {
       if (key == playerData.age) {
         value.forEach((element) {
+          if (playerData.age == 30) print(element);
           playerData.currentExpenseMonth -= (element / 12).toInt();
         });
       }
     });
-    playerData.balance -= val;
 
     if (playerData.mentalhealth <= 0) return;
 
@@ -401,7 +400,11 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
                   playerData.balance -= maxFromBalance;
                   playerData.stockbalance -= difference;
                   playerData.family = 'ehner';
-                  playerData.currentExpenseMonth -= 100000;
+
+                  print(playerData.currentExpenseMonth);
+                  playerData.currentExpenseMonth =
+                      max(0, playerData.currentExpenseMonth - 100000);
+                  print(playerData.currentExpenseMonth);
                 }
               } else {
                 price *= 2;
@@ -409,7 +412,8 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
                 playerData.allDebts.putIfAbsent(playerData.age + 5, () => []);
                 playerData.allDebts[playerData.age + 5]!
                     .add((price / 5).toInt());
-                playerData.currentExpenseMonth -= 100000;
+                playerData.currentExpenseMonth =
+                    max(0, playerData.currentExpenseMonth - 100000);
                 Get.snackbar(
                   'Амжилттай!',
                   'Та хуримаа хийлээ! Гэр бүлд нь сайн сайхныг хүсье.',

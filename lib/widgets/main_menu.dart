@@ -47,7 +47,7 @@ class MainMenu extends StatelessWidget {
                       gameRef.overlays.add(Hud.id);
                     },
                     child: const Text(
-                      'Play',
+                      'Тоглож эхлэх',
                       style: TextStyle(
                         fontSize: 30,
                       ),
@@ -59,7 +59,7 @@ class MainMenu extends StatelessWidget {
                       gameRef.overlays.add(SettingsMenu.id);
                     },
                     child: const Text(
-                      'Settings',
+                      'Тохиргоо',
                       style: TextStyle(
                         fontSize: 30,
                       ),

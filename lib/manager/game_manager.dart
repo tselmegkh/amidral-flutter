@@ -93,6 +93,7 @@ class GameManager extends FlameGame with TapDetector, HasCollisionDetection {
     player.currentExpenseMonth = 150000;
     player.isUniversity = false;
     player.currentSalaryMonth = 0;
+    player.mentalhealth = 3;
   }
 
   // Future<PlayerModel> _readPlayerData() async {

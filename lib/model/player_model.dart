@@ -112,7 +112,7 @@ class PlayerModel extends ChangeNotifier with HiveObjectMixin {
       highScore = currentScore;
     }
     notifyListeners();
-    save();
+    // save();
   }
 
   set education(Education value) {

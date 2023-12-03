@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:amidral/widgets/hud.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../manager/audio_manager.dart';
@@ -41,11 +42,11 @@ class GameOverMenu extends StatelessWidget {
                       'Game Over',
                       style: TextStyle(fontSize: 40, color: Colors.white),
                     ),
-                    Selector<PlayerModel, int>(
-                      selector: (_, playerData) => playerData.currentScore,
-                      builder: (_, score, __) {
+                    Selector<PlayerModel, PlayerModel>(
+                      selector: (_, playerData) => playerData,
+                      builder: (_, playerData, __) {
                         return Text(
-                          'You Score: $score',
+                          'Таны хуримтлал: ${formatMoney(playerData.balance + playerData.stockbalance)}₮',
                           style: const TextStyle(
                               fontSize: 40, color: Colors.white),
                         );
@@ -53,7 +54,7 @@ class GameOverMenu extends StatelessWidget {
                     ),
                     ElevatedButton(
                       child: const Text(
-                        'Restart',
+                        'Дахин эхлэх',
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -69,7 +70,7 @@ class GameOverMenu extends StatelessWidget {
                     ),
                     ElevatedButton(
                       child: const Text(
-                        'Exit',
+                        'Гарах',
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -90,5 +91,11 @@ class GameOverMenu extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String formatMoney(int amount) {
+    NumberFormat formatter = NumberFormat('#,###');
+
+    return formatter.format(amount);
   }
 }

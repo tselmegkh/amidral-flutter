@@ -57,7 +57,7 @@ class PauseMenu extends StatelessWidget {
                         AudioManager.instance.resumeBgm();
                       },
                       child: const Text(
-                        'Resume',
+                        'Үргэлжлүүлэх',
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -73,7 +73,7 @@ class PauseMenu extends StatelessWidget {
                         AudioManager.instance.resumeBgm();
                       },
                       child: const Text(
-                        'Restart',
+                        'Дахин эхлэх',
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -88,7 +88,7 @@ class PauseMenu extends StatelessWidget {
                         AudioManager.instance.resumeBgm();
                       },
                       child: const Text(
-                        'Exit',
+                        'Гарах',
                         style: TextStyle(
                           fontSize: 30,
                         ),

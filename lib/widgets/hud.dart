@@ -29,6 +29,8 @@ class Hud extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextButton(
                     onPressed: () {
@@ -44,8 +46,11 @@ class Hud extends StatelessWidget {
                     builder: (_, currentSalaryMonth, __) {
                       return Text(
                         'Сарын цалин: ${formatMoney(currentSalaryMonth)}₮',
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white),
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.black54,
+                          fontFamily: 'RobotoMono',
+                        ),
                       );
                     },
                   ),
@@ -54,18 +59,8 @@ class Hud extends StatelessWidget {
                     builder: (_, currentExpenseMonth, __) {
                       return Text(
                         'Сарын зарлага: ${formatMoney(currentExpenseMonth)}₮',
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white),
-                      );
-                    },
-                  ),
-                  Selector<PlayerModel, int>(
-                    selector: (_, playerData) => playerData.currentDebtsMonth,
-                    builder: (_, currentDebtsMonth, __) {
-                      return Text(
-                        'Сард төлөх зээл: ${formatMoney(currentDebtsMonth)}₮',
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white),
+                        style: const TextStyle(
+                            fontSize: 20, color: Colors.black54),
                       );
                     },
                   ),
@@ -74,8 +69,8 @@ class Hud extends StatelessWidget {
                     builder: (_, familyHayalga, __) {
                       return Text(
                         'Эцэг эхийн хаялга: ${formatMoney(familyHayalga)}₮',
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white),
+                        style: const TextStyle(
+                            fontSize: 20, color: Colors.black54),
                       );
                     },
                   ),
@@ -83,6 +78,8 @@ class Hud extends StatelessWidget {
               ),
               const Spacer(),
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Selector<PlayerModel, int>(
                     selector: (_, playerData) => playerData.lives,
@@ -115,8 +112,10 @@ class Hud extends StatelessWidget {
                     builder: (_, age, __) {
                       return Text(
                         'Нас: $age',
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white),
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.black54,
+                        ),
                       );
                     },
                   ),
@@ -125,8 +124,13 @@ class Hud extends StatelessWidget {
                     builder: (_, mentalhealth, __) {
                       return Text(
                         'Сэтгэл зүйн байдал: ${mentalhealth >= 4 ? 'Сайн' : mentalhealth == 3 ? 'Дунд' : 'Муу'}',
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white),
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: mentalhealth >= 4
+                                ? Colors.green
+                                : mentalhealth == 3
+                                    ? Colors.orange
+                                    : Colors.red),
                       );
                     },
                   ),
@@ -135,8 +139,8 @@ class Hud extends StatelessWidget {
                     builder: (_, balance, __) {
                       return Text(
                         'Дансны үлдэгдэл: ${formatMoney(balance)}₮',
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white),
+                        style: const TextStyle(
+                            fontSize: 20, color: Colors.black54),
                       );
                     },
                   ),
@@ -145,13 +149,23 @@ class Hud extends StatelessWidget {
                     builder: (_, stockbalance, __) {
                       return Text(
                         'Хувьцааны хөрөнгө: ${formatMoney(stockbalance)}₮',
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white),
+                        style: const TextStyle(
+                            fontSize: 20, color: Colors.black54),
                       );
                     },
                   ),
-                  TextButton(
-                    onPressed: () {
+                  Selector<PlayerModel, double>(
+                    selector: (_, playerData) => playerData.investmentPercent,
+                    builder: (_, investmentPercent, __) {
+                      return Text(
+                        'Хөрөнгө оруулалтын хувь: ${(investmentPercent * 100).toInt()}%',
+                        style: const TextStyle(
+                            fontSize: 20, color: Colors.black54),
+                      );
+                    },
+                  ),
+                  InkWell(
+                    onTap: () {
                       Get.dialog(
                         QuestionDialog(
                           question:
@@ -172,9 +186,19 @@ class Hud extends StatelessWidget {
                         }
                       });
                     },
-                    child: Container(
-                      child: Text(
-                        'Хувьцаанд хөрөнгө оруулах хувиа шинэчлэх',
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: Text(
+                          'Шинэчлэх',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 20,
+                          ),
+                        ),
                       ),
                     ),
                   ),
