@@ -120,9 +120,10 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
     _hitTimer.start();
     playerData.age += 1;
     playerData.balance += playerData.currentSalaryMonth * 12;
+
     int difference =
         playerData.currentExpenseMonth - playerData.currentSalaryMonth;
-
+    playerData.stockbalance += (playerData.stockbalance * 0.15).toInt();
     if (difference > 0 &&
         difference * 12 > playerData.balance &&
         playerData.age <= 25) {
@@ -167,8 +168,6 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
 
     if (playerData.mentalhealth <= 0) return;
 
-    playerData.stockbalance += (playerData.stockbalance * 0.15).toInt();
-
     // Random random = new Random();
     // int randomNumber = random.nextInt(100);
     // if (randomNumber <= 2) {
@@ -183,6 +182,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
             'Үгүй',
           ],
         ),
+        barrierDismissible: false,
       ).then((value) {
         if (value == 'Тийм') {
           Get.dialog(
@@ -233,6 +233,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
                 'Бариста',
               ],
             ),
+            barrierDismissible: false,
           ).then((value) {
             playerData.currentSalaryMonth = tsalin[value] ?? 0;
             playerData.currentExpenseMonth +=
@@ -250,6 +251,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
           question: 'Найзуудтайгаа 100,000 төгрөгөөр шоудах уу?',
           choices: ['Тийм', 'Үгүй'],
         ),
+        barrierDismissible: false,
       ).then((value) {
         if (value == 'Тийм') {
           playerData.mentalhealth = max(5, playerData.mentalhealth + 1);
@@ -278,10 +280,11 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
           question: 'Цагийн ажил хийх үү?',
           choices: ['Тийм', 'Үгүй'],
         ),
+        barrierDismissible: false,
       ).then((value) {
         if (value == 'Тийм') {
           playerData.currentSalaryMonth = 600000;
-          playerData.mentalhealth += 1;
+          playerData.mentalhealth = min(5, playerData.mentalhealth + 1);
           playerData.lives--;
         } else {
           playerData.mentalhealth -= 1;
@@ -325,6 +328,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
             'Үгүй',
           ],
         ),
+        barrierDismissible: false,
       ).then((value) {
         if (value != 'Үгүй') {
           Get.dialog(
@@ -369,15 +373,19 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
 
     if (playerData.age == 25) {
       if (playerData.family == 'gf') {
-        Get.dialog(QuestionDialog(
-            question: 'Та хуримаа хийх үү? Зардал: 50,000,000₮',
-            choices: ['Тийм', 'Үгүй', 'Салах'])).then((value) {
+        Get.dialog(
+          QuestionDialog(
+              question: 'Та хуримаа хийх үү? Зардал: 50,000,000₮',
+              choices: ['Тийм', 'Үгүй', 'Салах']),
+          barrierDismissible: false,
+        ).then((value) {
           if (value == 'Тийм') {
             Get.dialog(
               QuestionDialog(
                 question: 'Төлбөрөө яаж шийдэх вэ?',
                 choices: ['Шууд', 'Жилийн 20%-ын 5 жилийн зээлээр'],
               ),
+              barrierDismissible: false,
             ).then((value2) {
               int price = 50000000;
               if (value2 == 'Шууд') {
@@ -415,11 +423,14 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
       }
     }
     if (playerData.age == 28) {
-      Get.dialog(QuestionDialog(question: 'Та байр авах уу?', choices: [
-        '2 өрөө байр, 70,000,000₮',
-        '5 өрөө байр, 200,000,000₮',
-        'Түрээс, сарын 700,000₮'
-      ])).then((value) {
+      Get.dialog(
+        QuestionDialog(question: 'Та байр авах уу?', choices: [
+          '2 өрөө байр, 70,000,000₮',
+          '5 өрөө байр, 200,000,000₮',
+          'Түрээс, сарын 700,000₮'
+        ]),
+        barrierDismissible: false,
+      ).then((value) {
         //Ursgal zardal 2 uruu - 1,200,000 / year
         //Ursgal zardal 5 uruu - 2,400,000 / year
         //Turees ursgal zardal - 1,200,000 / year
@@ -429,6 +440,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
               question: 'Төлбөрөө яаж шийдэх вэ?',
               choices: ['Шууд', 'Жилийн 6%-ын 20 жилийн зээлээр'],
             ),
+            barrierDismissible: false,
           ).then((value2) {
             int price =
                 value == '2 өрөө байр, 70,000,000₮' ? 70000000 : 200000000;
@@ -474,11 +486,12 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
             question: 'Хүүхэдтэй болох уу?',
             choices: ['Тийм', 'Үгүй'],
           ),
+          barrierDismissible: false,
         ).then((value) {
           if (value == 'Тийм') {
             playerData.currentExpenseMonth =
                 (playerData.currentExpenseMonth * 1.1).toInt();
-            playerData.mentalhealth += 1;
+            playerData.mentalhealth = min(5, playerData.mentalhealth + 1);
           } else {
             playerData.mentalhealth -= 1;
           }
@@ -488,7 +501,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
     if (playerData.age == 30) {
       Get.snackbar(
           'Баяр хүргэе!', 'Та албан тушаал ахиж таны цалин 30%-аар нэмэгдлээ');
-      playerData.mentalhealth = max(5, playerData.mentalhealth + 1);
+      playerData.mentalhealth = min(5, playerData.mentalhealth + 1);
       playerData.currentSalaryMonth =
           (playerData.currentSalaryMonth * 1.3).toInt();
     }
@@ -503,6 +516,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
             'Үгүй',
           ],
         ),
+        barrierDismissible: false,
       ).then((value) {
         if (value != 'Үгүй') {
           Get.dialog(
@@ -510,6 +524,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
               question: 'Ямар аргаар авах вэ?',
               choices: ['Шууд', 'Жилийн 20%-ын 5 жилийн зээлээр'],
             ),
+            barrierDismissible: false,
           ).then((value2) {
             int price =
                 value == 'Prius 30 авъя!, 30,000,000₮' ? 30000000 : 200000000;
@@ -553,6 +568,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
             'Үгүй',
           ],
         ),
+        barrierDismissible: false,
       ).then((value) {
         if (value != 'Үгүй') {
           Get.dialog(
@@ -560,6 +576,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
               question: 'Ямар аргаар авах вэ?',
               choices: ['Шууд', 'Жилийн 6%-ын 20 жилийн зээлээр'],
             ),
+            barrierDismissible: false,
           ).then((value2) {
             int price = value == 'Зайсанд 3 өрөө байр!, 400,000,000₮'
                 ? 400000000
@@ -606,6 +623,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
           question: 'Эхнэр/нөхөртөө бэлэг авж өгөх үү, аялах уу?',
           choices: ['Бэлэг авч өгье. 10,000,000₮', 'Үгүй'],
         ),
+        barrierDismissible: false,
       ).then((value) {
         if (value == 'Тийм') {
           if (playerData.balance + playerData.stockbalance < 10000000) {
@@ -616,7 +634,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
             int difference = 10000000 - maxFromBalance;
             playerData.balance -= maxFromBalance;
             playerData.stockbalance -= difference;
-            playerData.mentalhealth++;
+            playerData.mentalhealth = min(5, playerData.mentalhealth + 1);
           }
         } else {
           playerData.mentalhealth -= 1;
@@ -629,6 +647,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
           question: 'Гэр бүлээрээ сайхан Тайландаар аялачих уу?',
           choices: ['Ок. 30,000,000₮', 'Үгүй'],
         ),
+        barrierDismissible: false,
       ).then((value) {
         if (value != 'Үгүй') {
           if (playerData.balance + playerData.stockbalance < 30000000) {
@@ -639,7 +658,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
             int difference = 10000000 - maxFromBalance;
             playerData.balance -= maxFromBalance;
             playerData.stockbalance -= difference;
-            playerData.mentalhealth++;
+            playerData.mentalhealth = min(5, playerData.mentalhealth + 1);
           }
         } else {
           playerData.mentalhealth -= 1;
@@ -652,6 +671,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
           question: 'Сайхан 50 насны баяраа хийх үү, хө? 50,000,000₮',
           choices: ['Тийм', 'Үгүй'],
         ),
+        barrierDismissible: false,
       ).then((value) {
         if (value == 'Тийм') {
           if (playerData.balance + playerData.stockbalance < 50000000) {
@@ -662,7 +682,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
             int difference = 50000000 - maxFromBalance;
             playerData.balance -= maxFromBalance;
             playerData.stockbalance -= difference;
-            playerData.mentalhealth++;
+            playerData.mentalhealth = min(5, playerData.mentalhealth + 1);
           }
         } else {
           playerData.mentalhealth -= 1;
@@ -689,6 +709,7 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
         question: 'Хурамаа хийх үү?',
         choices: ['Тийм', 'Үгүй'],
       ),
+      barrierDismissible: false,
     ).then((value) => {
           if (value == 'Тийм')
             {}
@@ -705,9 +726,10 @@ class TRexComponent extends SpriteAnimationGroupComponent<TRexAnimationState>
         question: 'Найз охин/залуу-тай болох уу?',
         choices: ['Тийм', 'Үгүй'],
       ),
+      barrierDismissible: false,
     ).then((value) {
       if (value == 'Тийм') {
-        playerData.mentalhealth = max(5, playerData.mentalhealth + 1);
+        playerData.mentalhealth = min(5, playerData.mentalhealth + 1);
         playerData.currentExpenseMonth +=
             (playerData.currentSalaryMonth / 10 * 2).toInt();
         playerData.family = 'gf';
