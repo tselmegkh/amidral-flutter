@@ -1,4 +1,5 @@
 import 'package:amidral/model/setting_model.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 class AudioManager {
   //
@@ -13,36 +14,36 @@ class AudioManager {
   Future<void> init(List<String> files, SettingModel settings) async {
     this.settings = settings;
 
-    // FlameAudio.bgm.initialize();
+    FlameAudio.bgm.initialize();
 
-    // await FlameAudio.audioCache.loadAll(files);
+    await FlameAudio.audioCache.loadAll(files);
   }
 
   void startBgm([String filename = '8BitPlatformerLoop.wav']) {
     if (settings.bgm) {
-      // FlameAudio.bgm.play(filename, volume: 0.5);
+      FlameAudio.bgm.play(filename, volume: 0.5);
     }
   }
 
   void pauseBgm() {
     if (settings.bgm) {
-      // FlameAudio.bgm.pause();
+      FlameAudio.bgm.pause();
     }
   }
 
   void resumeBgm() {
     if (settings.bgm) {
-      // FlameAudio.bgm.resume();
+      FlameAudio.bgm.resume();
     }
   }
 
   void stopBgm() {
-    // FlameAudio.bgm.stop();
+    FlameAudio.bgm.stop();
   }
 
   void playSfx(String fileName) {
     if (settings.sfx) {
-      // FlameAudio.play(fileName);
+      FlameAudio.play(fileName);
     }
   }
 }

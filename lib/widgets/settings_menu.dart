@@ -37,7 +37,7 @@ class SettingsMenu extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Settings',
+                      'Тохиргоо',
                       style: TextStyle(
                         fontSize: 35,
                         color: Colors.white,
@@ -48,7 +48,7 @@ class SettingsMenu extends StatelessWidget {
                       builder: (context, bgm, __) {
                         return SwitchListTile(
                           title: const Text(
-                            'Music',
+                            'Хөгжим',
                             style: TextStyle(
                               fontSize: 28,
                               color: Colors.white,
@@ -67,32 +67,13 @@ class SettingsMenu extends StatelessWidget {
                         );
                       },
                     ),
-                    Selector<SettingModel, bool>(
-                      selector: (_, settings) => settings.sfx,
-                      builder: (context, sfx, __) {
-                        return SwitchListTile(
-                          title: const Text(
-                            'Effects',
-                            style: TextStyle(
-                              fontSize: 28,
-                              color: Colors.white,
-                            ),
-                          ),
-                          value: sfx,
-                          onChanged: (bool value) {
-                            Provider.of<SettingModel>(context, listen: false)
-                                .sfx = value;
-                          },
-                        );
-                      },
-                    ),
                     TextButton(
                       onPressed: () {
                         gameRef.overlays.remove(SettingsMenu.id);
                         gameRef.overlays.add(MainMenu.id);
                       },
                       child: const Text(
-                        'Back',
+                        'Буцах',
                         style: TextStyle(
                           fontSize: 25,
                           color: Colors.white,
