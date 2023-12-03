@@ -29,10 +29,11 @@ void main() async {
 }
 
 Future<void> initHive() async {
-  final dir = await getApplicationDocumentsDirectory();
-  Hive.init(dir.path);
-  Hive.registerAdapter<PlayerModel>(PlayerModelAdapter());
-  Hive.registerAdapter<SettingModel>(SettingModelAdapter());
+  // final dir = await getApplicationDocumentsDirectory();
+  // Hive.init();
+
+  // Hive.registerAdapter<PlayerModel>(PlayerModelAdapter());
+  // Hive.registerAdapter<SettingModel>(SettingModelAdapter());
 }
 
 class App extends StatelessWidget {

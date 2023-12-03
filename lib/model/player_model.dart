@@ -5,7 +5,6 @@ part 'player_model.g.dart';
 
 @HiveType(typeId: 0)
 class PlayerModel extends ChangeNotifier with HiveObjectMixin {
-  @HiveField(1)
   int highScore = 0;
 
   int _age = 17;

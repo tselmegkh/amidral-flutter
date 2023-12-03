@@ -22,8 +22,8 @@ class GameManager extends FlameGame with TapDetector, HasCollisionDetection {
   late TRexComponent _trex;
   late EnemyManager _enemyManager;
 
-  late PlayerModel player;
-  late SettingModel setting;
+  PlayerModel player = PlayerModel();
+  SettingModel setting = SettingModel();
   static final GameManager _instance = GameManager._internal();
 
   GameManager._internal();
@@ -31,8 +31,8 @@ class GameManager extends FlameGame with TapDetector, HasCollisionDetection {
   factory GameManager() => _instance;
   @override
   Future<void>? onLoad() async {
-    player = await _readPlayerData();
-    setting = await _readSettings();
+    // player = await _readPlayerData();
+    // setting = await _readSettings();
 
     await AudioManager.instance.init(AssetManager.audios, setting);
     AudioManager.instance.startBgm();
@@ -95,26 +95,26 @@ class GameManager extends FlameGame with TapDetector, HasCollisionDetection {
     player.currentSalaryMonth = 0;
   }
 
-  Future<PlayerModel> _readPlayerData() async {
-    final playerDataBox = await Hive.openBox<PlayerModel>(kHivePlayerBox);
-    final playerData = playerDataBox.get(kHivePlayerData);
+  // Future<PlayerModel> _readPlayerData() async {
+  //   final playerDataBox = await Hive.openBox<PlayerModel>(kHivePlayerBox);
+  //   final playerData = playerDataBox.get(kHivePlayerData);
 
-    if (playerData == null) {
-      await playerDataBox.put(kHivePlayerData, PlayerModel());
-    }
-    return playerDataBox.get(kHivePlayerData)!;
-  }
+  //   if (playerData == null) {
+  //     await playerDataBox.put(kHivePlayerData, PlayerModel());
+  //   }
+  //   return playerDataBox.get(kHivePlayerData)!;
+  // }
 
-  Future<SettingModel> _readSettings() async {
-    final settingBox = await Hive.openBox<SettingModel>(kHiveSettingsBox);
-    final settings = settingBox.get(kHiveSettingsData);
+  // Future<SettingModel> _readSettings() async {
+  //   final settingBox = await Hive.openBox<SettingModel>(kHiveSettingsBox);
+  //   final settings = settingBox.get(kHiveSettingsData);
 
-    if (settings == null) {
-      await settingBox.put(kHiveSettingsData, SettingModel());
-    }
+  //   if (settings == null) {
+  //     await settingBox.put(kHiveSettingsData, SettingModel());
+  //   }
 
-    return settingBox.get(kHiveSettingsData)!;
-  }
+  //   return settingBox.get(kHiveSettingsData)!;
+  // }
 
   @override
   void lifecycleStateChange(AppLifecycleState state) {
